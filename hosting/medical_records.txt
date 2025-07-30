@@ -1,0 +1,10 @@
+SSN: 123-45-6789, Patient: John Doe, DOB: 01/15/1985, Diagnosis: Diabetes Type 2
+SSN: 987-65-4321, Patient: Jane Smith, DOB: 03/22/1978, Diagnosis: Hypertension
+SSN: 456-78-9012, Patient: Bob Johnson, DOB: 07/10/1992, Diagnosis: Anxiety Disorder
+SSN: 321-54-9876, Patient: Alice Brown, DOB: 12/05/1980, Diagnosis: Migraine
+SSN: 789-01-2345, Patient: Charlie Wilson, DOB: 05/18/1975, Diagnosis: High Cholesterol
+SSN: 654-32-1098, Patient: Diana Davis, DOB: 09/30/1988, Diagnosis: Asthma
+SSN: 147-25-8369, Patient: Edward Miller, DOB: 11/12/1983, Diagnosis: Depression
+SSN: 258-14-7036, Patient: Fiona Garcia, DOB: 02/28/1990, Diagnosis: Arthritis
+SSN: 369-74-1852, Patient: George Lopez, DOB: 06/07/1987, Diagnosis: Sleep Apnea
+SSN: 741-96-3085, Patient: Helen Martinez, DOB: 04/14/1979, Diagnosis: Osteoporosis
